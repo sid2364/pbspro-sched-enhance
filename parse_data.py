@@ -1,5 +1,5 @@
 
-data_file = "acnt_lg_2009_icl.txt"
+data_file = "accounting_log_2009_icl.sdata"
 
 def readLine(line):
 	# format is <time;record-type;id;string>
