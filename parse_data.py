@@ -1,3 +1,4 @@
+import json
 
 data_file = "accounting_log_2009_icl.sdata"
 
@@ -10,12 +11,22 @@ headers = field_list[:-1] + ["Resource_List.mem", "Resource_List.ncpus"]
 def readLine(line):
 	# format is <time;record-type;id;string>
 	# time is irrelevant ?
-	parsed = []
+	data = {}
 	if line[1] == "E":
-		parsed.append(line[2]) #id
+		lineta = {}
+		jid = str(line[2]) #id
 		#parse line and return only header values
+		count = 0
+		for part in line[3].split(" "):
+			field_name = part.split('=')[0]
+			field_value = ''.join(part.split('=')[1:])
+			lineta[field_name] = field_value
+			count += 1
+		lineta['arg_count'] = count
 	else:
 		return None
+	data[jid] = lineta
+	return data
 
 def parse(content):
 	data_l = []
@@ -24,8 +35,8 @@ def parse(content):
 		parsedLine = readLine(line.split(";"))
 		if parsedLine is not None:
 			data_l.append(parsedLine)
-			data_l.append(len(parsedLine))
-	print(data_l[450])
+	#print(json.dumps(data_l, indent=4))
+	return data_l
 
 if __name__=="__main__":
 	with open(data_file, "r") as datafp:
