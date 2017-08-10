@@ -58,11 +58,14 @@ def parse(content):
 		parsedLine = readLine(line.split(";"))
 		if parsedLine is not None:
 			data_l.append(parsedLine)
-	print(json.dumps(data_l, indent=4))
+	#print(json.dumps(data_l, indent=4))
 	return data_l
 
-if __name__=="__main__":
+def getData():
 	with open(data_file, "r") as datafp:
 		content = [line.rstrip('\n') for line in datafp]
 		data_l = parse(content)
-	
+		return data_l
+
+if __name__=="__main__":
+	print(json.dumps(getData(), indent=4))
