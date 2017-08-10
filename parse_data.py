@@ -14,8 +14,7 @@ mem_fields = ["Resource_List.mem", "resources_used.mem", "resources_used.vmem"]
 
 def convertToGMKb(memory_string, target='kb'):
 	gmk_d = {'kb': 1, 'mb': 2, 'gb': 3}
-	gmk = memory_string[-2:].lower()
-	size = float(memory_string[:-2])
+	gmk, size = memory_string[-2:].lower(), float(memory_string[:-2])
 	shift = gmk_d[target] - gmk_d[gmk]
 	if shift != 0:
 		size /= 1024**shift
@@ -35,7 +34,7 @@ def readLine(line):
 		count = 0
 		for part in line[3].split(" "):
 			field_name = part.split('=')[0]
-			field_value = ''.join(part.split('=')[1:])
+			field_value = '='.join(part.split('=')[1:])
 			if field_name in time_fields:
 				field_value_i = convertTimeToSeconds(field_value)
 			elif field_name in number_fields:
