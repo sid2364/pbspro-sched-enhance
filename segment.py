@@ -10,6 +10,7 @@ default_target_ft="resources_used.walltime"
 def split_features(data, trainers=default_train_ft, target=default_target_ft):
 	training_features = []
 	target_features = []
+	skipped = 0
 	for row in data:
 		for jid in row:
 			temp_d = row[jid]
@@ -20,7 +21,8 @@ def split_features(data, trainers=default_train_ft, target=default_target_ft):
 				training_features.append(training_)
 				target_features.append(temp_d[target])
 			except KeyError:
-				print("Skipping, since ", temp_d, "doesn't have valid keys.")
+				skipped += 1
+	print("Skipped " + str(skipped) + " rows due to KeyError.")
 	return training_features, target_features
 
 def segment_data(data, tr_s=0.75):
