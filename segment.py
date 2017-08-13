@@ -18,7 +18,8 @@ def split_features(data, trainers=default_train_ft, target=default_target_ft):
 			try:
 				for trainer in trainers:
 					training_.append(temp_d[trainer])
-				training_features.append(training_)
+				if temp_d[target] is not None: # to throw KeyError before appending
+					training_features.append(training_)
 				target_features.append(temp_d[target])
 			except KeyError:
 				skipped += 1

@@ -4,6 +4,11 @@ from sklearn.metrics import accuracy_score
 import parse_data as parse
 import segment as seg
 
+
+default_train_ft=["Resource_List.ncpus", "resources_used.mem", "Resource_List.walltime"]
+
+default_target_ft="resources_used.walltime"
+
 data = parse.getData()
 features_data, labels_data = seg.split_features(data)
 features_train, features_test = seg.segment_data(features_data)

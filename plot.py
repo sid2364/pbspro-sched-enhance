@@ -11,5 +11,5 @@ RL_walltime, RU_walltime = seg.split_features(data, train_ft, target_ft)
 
 print(len(RL_walltime), len(RU_walltime))
 
-plt.plot(RL_walltime, RU_walltime)
+plt.plot(RL_walltime, RU_walltime, 'ro')
 plt.show()
