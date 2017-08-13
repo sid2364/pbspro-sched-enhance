@@ -36,11 +36,11 @@ def readLine(line):
 			field_name = part.split('=')[0]
 			field_value = '='.join(part.split('=')[1:])
 			if field_name in time_fields:
-				field_value_i = convertTimeToSeconds(field_value)
+				field_value_i = float(convertTimeToSeconds(field_value))
 			elif field_name in number_fields:
-				field_value_i = int(field_value)
+				field_value_i = float(field_value)
 			elif field_name in mem_fields:
-				field_value_i = convertToGMKb(field_value)
+				field_value_i = float(convertToGMKb(field_value))
 			else:
 				field_value_i = field_value
 			lineta[field_name] = field_value_i
