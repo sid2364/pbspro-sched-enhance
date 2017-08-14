@@ -5,7 +5,7 @@ import parse_data as parse
 import segment as seg
 
 
-default_train_ft=["Resource_List.ncpus", "resources_used.mem", "Resource_List.walltime"]
+default_train_ft=["Resource_List.walltime"]
 
 default_target_ft="resources_used.walltime"
 
