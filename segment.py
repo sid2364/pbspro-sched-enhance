@@ -1,4 +1,8 @@
 import parse_data
+import matplotlib.pyplot as plt
+from matplotlib import style
+
+style.use('fivethirtyeight')
 
 # take data and segment into (RL_ncpus, RL_mem, RL_walltime, RU_ncpus, RU_mem) and target (RU_walltime)
 
@@ -27,12 +31,14 @@ def split_features(data, trainers=default_train_ft, target=default_target_ft):
 	return training_features, target_features
 
 def segment_data(data, tr_s=0.75):
-	te_s = 1 - tr_s
 	l = len(data)
 	return data[:int(tr_s*l)], data[int(tr_s*l)+1:]
 
 if __name__=="__main__":
 	data = parse_data.getData()
-	train_features, target_features = split_features(data)
+	train_features, target_features = split_features(data, trainers=["Resource_List.walltime"])
 	train_data, test_data = segment_data(train_features)
-	
+	plt.scatter(target_features, train_features)
+	plt.ylabel("Given walltime by user")
+	plt.xlabel("Actual walltime required for job")
+	plt.show()	
